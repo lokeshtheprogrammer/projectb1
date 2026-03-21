@@ -18,6 +18,9 @@ const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)
 // 1. LOADING SCREEN (PUBG-Style Percentage Loader)
 // Premium minimal design with smooth easing
 // ──────────────────────────────────────────────────────
+// Lock page scroll immediately so no content peeks under the loader
+document.body.classList.add('loader-active');
+
 window.addEventListener('load', () => {
   const loader = document.getElementById('loader');
   const percentEl = document.getElementById('pubg-percent');
@@ -28,38 +31,31 @@ window.addEventListener('load', () => {
     const messages = [
       "Initializing system...",
       "Loading assets...",
-      "Analyzing files...",
+      "Crafting experience...",
       "Optimizing performance...",
-      "Building experience...",
+      "Building visuals...",
       "Almost ready..."
     ];
     
     let currentPercent = 0;
     let lastDisplayedPercent = -1;
     
-    // Easing functions for natural progression
+    // Smooth easing for cinematic feel
     function easeOutExpo(x) {
       return x === 1 ? 1 : 1 - Math.pow(2, -10 * x);
     }
     
-    function easeInOutCubic(x) {
-      return x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2;
-    }
-    
     const startTime = performance.now();
-    const minDuration = 2200; // Minimum loading time for premium feel
-    const maxDuration = 3200; // Maximum loading time
+    const minDuration = 2400; // Minimum loading time for premium feel
     
     function updateLoader(currentTime) {
       const elapsed = currentTime - startTime;
-      let progress = Math.min(elapsed / minDuration, 1);
+      const progress = Math.min(elapsed / minDuration, 1);
       
-      // Use easeOutExpo for smooth acceleration through the middle
+      // EaseOutExpo: fast start, smooth finish
       const easedProgress = easeOutExpo(progress);
       
-      // Calculate percentage with smooth increment
-      currentPercent = Math.floor(easedProgress * 100);
-      currentPercent = Math.min(currentPercent, 100);
+      currentPercent = Math.min(Math.floor(easedProgress * 100), 100);
       
       // Only update DOM if percentage changed (performance optimization)
       if (currentPercent !== lastDisplayedPercent) {
@@ -67,40 +63,47 @@ window.addEventListener('load', () => {
         lastDisplayedPercent = currentPercent;
       }
       
-      // Update progress bar with linear transition
+      // Update progress bar
       progressBar.style.width = currentPercent + '%';
       
-      // Update loading message based on progress thresholds
-      if (currentPercent < 20) messageEl.textContent = messages[0];
-      else if (currentPercent < 35) messageEl.textContent = messages[1];
-      else if (currentPercent < 50) messageEl.textContent = messages[2];
-      else if (currentPercent < 70) messageEl.textContent = messages[3];
+      // Sync message with progress phase
+      if (currentPercent < 20)      messageEl.textContent = messages[0];
+      else if (currentPercent < 38) messageEl.textContent = messages[1];
+      else if (currentPercent < 55) messageEl.textContent = messages[2];
+      else if (currentPercent < 72) messageEl.textContent = messages[3];
       else if (currentPercent < 90) messageEl.textContent = messages[4];
-      else messageEl.textContent = messages[5];
+      else                          messageEl.textContent = messages[5];
       
       if (progress < 1) {
         requestAnimationFrame(updateLoader);
       } else {
-        // Pause at 100% for a moment, then fade out
+        // Hold at 100% for a dramatic pause, then cinematic fade-out
         setTimeout(() => {
           loader.classList.add('loaded');
+
+          // Unlock body scroll after transition completes (~900ms)
           setTimeout(() => {
-            // Trigger hero entrance or next animation if available
-            if(typeof triggerHeroEntrance === 'function') {
+            document.body.classList.remove('loader-active');
+
+            // Trigger hero entrance animations
+            if (typeof triggerHeroEntrance === 'function') {
               triggerHeroEntrance();
             }
-          }, 400);
-        }, 200); // Brief pause at completion for premium feel
+          }, 950);
+        }, 400); // Cinematic pause at 100% before exit
       }
     }
     
     requestAnimationFrame(updateLoader);
 
   } else if (loader) {
-    // Fallback if structure is missing
+    // Fallback if PUBG structure is missing
     setTimeout(() => {
       loader.classList.add('loaded');
-      if(typeof triggerHeroEntrance === 'function') triggerHeroEntrance();
+      setTimeout(() => {
+        document.body.classList.remove('loader-active');
+        if (typeof triggerHeroEntrance === 'function') triggerHeroEntrance();
+      }, 950);
     }, 2500);
   }
 });
