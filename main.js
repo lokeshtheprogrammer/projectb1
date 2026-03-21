@@ -25,6 +25,7 @@ window.addEventListener('load', () => {
   const loader = document.getElementById('loader');
   const percentEl = document.getElementById('pubg-percent');
   const progressBar = document.getElementById('pubg-progress-bar');
+  const progressContainer = document.getElementById('pubg-progress-container');
   const messageEl = document.getElementById('pubg-message');
   
   if (loader && percentEl && progressBar && messageEl) {
@@ -61,6 +62,10 @@ window.addEventListener('load', () => {
       if (currentPercent !== lastDisplayedPercent) {
         percentEl.textContent = currentPercent;
         lastDisplayedPercent = currentPercent;
+        // Keep aria-valuenow in sync for screen-reader progressbar role
+        if (progressContainer) {
+          progressContainer.setAttribute('aria-valuenow', currentPercent);
+        }
       }
       
       // Update progress bar
@@ -80,6 +85,10 @@ window.addEventListener('load', () => {
         // Hold at 100% for a dramatic pause, then cinematic fade-out
         setTimeout(() => {
           loader.classList.add('loaded');
+          
+          // Announce to screen readers
+          const loaderStatus = document.getElementById('loader-status');
+          if (loaderStatus) loaderStatus.textContent = 'Page loaded successfully.';
 
           // Unlock body scroll after transition completes (~900ms)
           setTimeout(() => {
@@ -769,7 +778,28 @@ if (contactForm) {
     const success = document.getElementById('form-success');
     if (!btn || !success) return;
 
-    // Submit animation
+    // Submit animation with basic validation
+    const nameInp = document.getElementById('inp-name');
+    const emailInp = document.getElementById('inp-email');
+    const msgInp = document.getElementById('inp-message');
+    const serviceInp = document.getElementById('inp-service');
+
+    let isValid = true;
+    [nameInp, emailInp, msgInp, serviceInp].forEach(el => {
+      if (!el) return;
+      if (el.tagName === 'SELECT') {
+        if (!el.value) { isValid = false; el.classList.add('error'); }
+        else { el.classList.remove('error'); }
+      } else if (!el.value || (el.type === 'email' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(el.value))) {
+        isValid = false;
+        el.classList.add('error');
+      } else {
+        el.classList.remove('error');
+      }
+    });
+
+    if (!isValid) return;
+
     btn.querySelector('span:first-child').textContent = 'Sending…';
     btn.disabled = true;
     btn.style.opacity = '0.7';
@@ -777,6 +807,7 @@ if (contactForm) {
     setTimeout(() => {
       success.classList.add('visible');
       this.reset();
+      [nameInp, emailInp, msgInp, serviceInp].forEach(el => el && el.classList.remove('error'));
       btn.querySelector('span:first-child').textContent = 'Send Message';
       btn.disabled = false;
       btn.style.opacity = '';

@@ -29,7 +29,7 @@
 
   <!-- ========== LOADING SCREEN (PUBG-STYLE PERCENTAGE LOADER) ========== -->
   <!-- Premium minimal loader with smooth animations and premium dark theme -->
-  <div id="loader" class="loader pubg-loader" aria-hidden="true">
+  <div id="loader" class="loader pubg-loader" role="region" aria-label="Page loading">
     <!-- Ambient glow background -->
     <div class="loader-ambient-glow"></div>
     
@@ -53,14 +53,16 @@
       </div>
       
       <!-- Minimalist progress bar -->
-      <div class="pubg-progress-container">
+      <div class="pubg-progress-container" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-label="Loading progress" id="pubg-progress-container">
         <div class="pubg-progress-bar" id="pubg-progress-bar">
           <div class="pubg-progress-glow"></div>
         </div>
       </div>
       
       <!-- Dynamic status message -->
-      <div class="pubg-message" id="pubg-message">Initializing system...</div>
+      <div class="pubg-message" id="pubg-message" role="status" aria-live="polite" aria-atomic="true">Initializing system...</div>
+      <!-- Hidden announcement for screen readers -->
+      <div id="loader-status" class="sr-only" aria-live="assertive"></div>
     </div>
   </div>
 
@@ -316,16 +318,8 @@
       <!-- Portfolio Grid -->
       <div class="portfolio-grid">
         <div class="portfolio-card reveal-up" data-category="restaurant">
-          <div class="portfolio-thumb" style="--thumb-gradient: linear-gradient(135deg, #1A1020, #3D1A00)">
-            <div class="portfolio-mockup">
-              <div class="mockup-browser">
-                <div class="mockup-dots"><span></span><span></span><span></span></div>
-                <div class="mockup-body">
-                  <div class="mockup-hero" style="background: linear-gradient(135deg, #FF6B35, #FF3D00)"></div>
-                  <div class="mockup-lines"><div></div><div></div><div></div></div>
-                </div>
-              </div>
-            </div>
+          <div class="portfolio-thumb">
+            <img src="assets/img/steakhouse.png" alt="Ember & Oak Steakhouse Website" class="portfolio-img">
           </div>
           <div class="portfolio-info">
             <span class="portfolio-cat">Restaurant</span>
@@ -335,16 +329,8 @@
         </div>
 
         <div class="portfolio-card reveal-up" data-category="cafe">
-          <div class="portfolio-thumb" style="--thumb-gradient: linear-gradient(135deg, #0A1A2A, #001A3D)">
-            <div class="portfolio-mockup">
-              <div class="mockup-browser">
-                <div class="mockup-dots"><span></span><span></span><span></span></div>
-                <div class="mockup-body">
-                  <div class="mockup-hero" style="background: linear-gradient(135deg, #00F5FF, #0066CC)"></div>
-                  <div class="mockup-lines"><div></div><div></div><div></div></div>
-                </div>
-              </div>
-            </div>
+          <div class="portfolio-thumb">
+            <img src="assets/img/coffee_bar.png" alt="Bloom Coffee Bar App" class="portfolio-img">
           </div>
           <div class="portfolio-info">
             <span class="portfolio-cat">Café</span>
@@ -354,16 +340,8 @@
         </div>
 
         <div class="portfolio-card reveal-up" data-category="retail">
-          <div class="portfolio-thumb" style="--thumb-gradient: linear-gradient(135deg, #1A1A0A, #2A3D00)">
-            <div class="portfolio-mockup">
-              <div class="mockup-browser">
-                <div class="mockup-dots"><span></span><span></span><span></span></div>
-                <div class="mockup-body">
-                  <div class="mockup-hero" style="background: linear-gradient(135deg, #F7C948, #FF8C00)"></div>
-                  <div class="mockup-lines"><div></div><div></div><div></div></div>
-                </div>
-              </div>
-            </div>
+          <div class="portfolio-thumb">
+            <img src="assets/img/spice_market.png" alt="Saffron Spice Market E-commerce" class="portfolio-img">
           </div>
           <div class="portfolio-info">
             <span class="portfolio-cat">Retail</span>
@@ -373,16 +351,8 @@
         </div>
 
         <div class="portfolio-card reveal-up" data-category="restaurant">
-          <div class="portfolio-thumb" style="--thumb-gradient: linear-gradient(135deg, #1A0020, #2D0060)">
-            <div class="portfolio-mockup">
-              <div class="mockup-browser">
-                <div class="mockup-dots"><span></span><span></span><span></span></div>
-                <div class="mockup-body">
-                  <div class="mockup-hero" style="background: linear-gradient(135deg, #BF00FF, #6600CC)"></div>
-                  <div class="mockup-lines"><div></div><div></div><div></div></div>
-                </div>
-              </div>
-            </div>
+          <div class="portfolio-thumb">
+            <img src="assets/img/ramen_house.png" alt="Koji Ramen House App" class="portfolio-img">
           </div>
           <div class="portfolio-info">
             <span class="portfolio-cat">Restaurant</span>
@@ -392,16 +362,8 @@
         </div>
 
         <div class="portfolio-card reveal-up" data-category="cafe">
-          <div class="portfolio-thumb" style="--thumb-gradient: linear-gradient(135deg, #001A10, #003D1A)">
-            <div class="portfolio-mockup">
-              <div class="mockup-browser">
-                <div class="mockup-dots"><span></span><span></span><span></span></div>
-                <div class="mockup-body">
-                  <div class="mockup-hero" style="background: linear-gradient(135deg, #39FF14, #00CC44)"></div>
-                  <div class="mockup-lines"><div></div><div></div><div></div></div>
-                </div>
-              </div>
-            </div>
+          <div class="portfolio-thumb">
+            <img src="assets/img/juice_bar.png" alt="The Green Press Website" class="portfolio-img">
           </div>
           <div class="portfolio-info">
             <span class="portfolio-cat">Café</span>
@@ -411,16 +373,8 @@
         </div>
 
         <div class="portfolio-card reveal-up" data-category="retail">
-          <div class="portfolio-thumb" style="--thumb-gradient: linear-gradient(135deg, #1A0A00, #3D1A00)">
-            <div class="portfolio-mockup">
-              <div class="mockup-browser">
-                <div class="mockup-dots"><span></span><span></span><span></span></div>
-                <div class="mockup-body">
-                  <div class="mockup-hero" style="background: linear-gradient(135deg, #FFB347, #FF6B35)"></div>
-                  <div class="mockup-lines"><div></div><div></div><div></div></div>
-                </div>
-              </div>
-            </div>
+          <div class="portfolio-thumb">
+            <img src="assets/img/bakery.png" alt="Casa Dulce Bakery Website" class="portfolio-img">
           </div>
           <div class="portfolio-info">
             <span class="portfolio-cat">Retail</span>
