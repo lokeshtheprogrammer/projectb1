@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+  <title>Korexa — Premium Websites & Apps for Restaurants & Local Businesses</title>
+  <meta name="description" content="Korexa crafts award-winning websites and apps for restaurants and local businesses. Elevate your brand with a stunning digital presence that converts." />
+  <meta property="og:title" content="Korexa — Premium Digital Agency" />
+  <meta property="og:description" content="Award-winning websites & apps for restaurants and local businesses." />
+  <meta property="og:type" content="website" />
+  <meta name="theme-color" content="#080811" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- Three.js (lightweight, loaded async) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js" defer></script>
+</head>
+<body>
+
+  <!-- ========== CUSTOM CURSOR (desktop only, hidden on mobile via CSS) ========== -->
+  <div id="cursor" class="custom-cursor" aria-hidden="true"></div>
+  <div id="cursor-follower" class="cursor-follower" aria-hidden="true"></div>
+
+  <!-- ========== LOADING SCREEN (PUBG-STYLE PERCENTAGE LOADER) ========== -->
+  <!-- Premium minimal loader with smooth animations and premium dark theme -->
+  <div id="loader" class="loader pubg-loader" aria-hidden="true">
+    <!-- Ambient glow background -->
+    <div class="loader-ambient-glow"></div>
+    
+    <!-- Subtle floating particles for atmosphere -->
+    <div class="ambient-particles">
+      <div class="particle p1"></div>
+      <div class="particle p2"></div>
+      <div class="particle p3"></div>
+      <div class="particle p4"></div>
+      <div class="particle p5"></div>
+      <div class="particle p6"></div>
+      <div class="particle p7"></div>
+    </div>
+    
+    <!-- Main loader content: percentage, progress bar, message -->
+    <div class="pubg-loader-content">
+      <!-- Large animated percentage display -->
+      <div class="pubg-percent-wrapper">
+        <span class="pubg-percent" id="pubg-percent">0</span>
+        <span class="pubg-percent-sign">%</span>
+      </div>
+      
+      <!-- Minimalist progress bar -->
+      <div class="pubg-progress-container">
+        <div class="pubg-progress-bar" id="pubg-progress-bar">
+          <div class="pubg-progress-glow"></div>
+        </div>
+      </div>
+      
+      <!-- Dynamic status message -->
+      <div class="pubg-message" id="pubg-message">Initializing system...</div>
+    </div>
+  </div>
+
+  <!-- ========== NAVIGATION ========== -->
+  <nav id="navbar" class="navbar" role="navigation" aria-label="Main navigation">
+    <a href="#" class="nav-logo" aria-label="Korexa Home">
+      <span class="logo-k">K</span><span class="logo-text">orexa</span>
+    </a>
+    
+    <ul class="nav-links" id="nav-links">
+      <li><a href="#services" class="nav-link">Services</a></li>
+      <li><a href="#portfolio" class="nav-link">Portfolio</a></li>
+      <li><a href="#about" class="nav-link">About</a></li>
+      <li><a href="#testimonials" class="nav-link">Reviews</a></li>
+      <li><a href="#pricing" class="nav-link">Pricing</a></li>
+    </ul>
+    
+    <a href="#contact" class="nav-cta">
+      Let's Talk <span class="nav-cta-arrow">→</span>
+    </a>
+    
+    <button id="menu-toggle" class="menu-toggle" aria-label="Toggle menu" aria-expanded="false">
+      <span class="menu-bar"></span>
+      <span class="menu-bar"></span>
+      <span class="menu-bar"></span>
+    </button>
+  </nav>
+
+  <!-- ========== MOBILE MENU ========== -->
+  <div id="mobile-menu" class="mobile-menu" role="dialog" aria-label="Mobile navigation">
+    <div class="mobile-menu-bg"></div>
+    <div class="mobile-menu-content">
+      <a href="#services" class="mobile-nav-link" tabindex="-1">Services</a>
+      <a href="#portfolio" class="mobile-nav-link" tabindex="-1">Portfolio</a>
+      <a href="#about" class="mobile-nav-link" tabindex="-1">About</a>
+      <a href="#testimonials" class="mobile-nav-link" tabindex="-1">Reviews</a>
+      <a href="#pricing" class="mobile-nav-link" tabindex="-1">Pricing</a>
+      <a href="#contact" class="mobile-nav-link mobile-nav-cta" tabindex="-1">Get Started →</a>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════════
+       SECTION 1 — HERO
+       Desktop: Three.js interactive 3D particle field
+       Mobile: Lightweight CSS gradient mesh animation
+  ══════════════════════════════════════════════════════════ -->
+  <section id="hero" class="hero">
+    <!-- Three.js canvas (desktop only, hidden on mobile via JS) -->
+    <canvas id="hero-canvas" class="hero-canvas" aria-hidden="true"></canvas>
+    
+    <!-- Mobile gradient mesh background (visible on mobile only) -->
+    <div class="hero-gradient-mesh" aria-hidden="true">
+      <div class="mesh-blob mesh-blob-1"></div>
+      <div class="mesh-blob mesh-blob-2"></div>
+      <div class="mesh-blob mesh-blob-3"></div>
+    </div>
+    
+    <!-- Grain overlay for premium texture -->
+    <div class="hero-grain" aria-hidden="true"></div>
+    
+    <!-- Bottom fade -->
+    <div class="hero-fade" aria-hidden="true"></div>
+
+    <div class="hero-content">
+      <div class="hero-badge" id="hero-badge">
+        <span class="badge-dot"></span>
+        <span>#1 Digital Agency for Local Businesses</span>
+      </div>
+      
+      <h1 class="hero-title" id="hero-title">
+        Your Restaurant Deserves<br/>
+        <span class="gradient-text">a Website That Sells.</span>
+      </h1>
+      
+      <p class="hero-sub" id="hero-sub">
+        We craft immersive digital experiences for restaurants and local businesses — turning visitors into loyal customers.
+      </p>
+      
+      <div class="hero-ctas" id="hero-ctas">
+        <a href="#portfolio" class="btn-primary" id="cta-portfolio">
+          <span>View Our Work</span>
+          <span class="btn-arrow">→</span>
+        </a>
+        <a href="#contact" class="btn-outline" id="cta-contact">
+          <span>Free Consultation</span>
+        </a>
+      </div>
+
+      <!-- Floating stats -->
+      <div class="hero-stats" id="hero-stats">
+        <div class="stat-card">
+          <div class="stat-number" data-count="120">0</div>
+          <div class="stat-label">Projects Launched</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number" data-count="98">0</div>
+          <div class="stat-label">Happy Clients</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number" data-count="5">0</div>
+          <div class="stat-label">Years Experience</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number" data-count="40">0</div>
+          <div class="stat-label">Avg. Revenue Boost %</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scroll indicator -->
+    <div class="scroll-indicator" aria-hidden="true">
+      <span class="scroll-text">Scroll</span>
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════════
+       SECTION 2 — SERVICES
+       Desktop: 3D tilt cards with glow effects
+       Mobile: Stacked cards with subtle entrance animations
+  ══════════════════════════════════════════════════════════ -->
+  <section id="services" class="section services">
+    <div class="section-glow glow-warm" aria-hidden="true"></div>
+    <div class="container">
+      <div class="section-header reveal-up">
+        <span class="section-tag">What We Do</span>
+        <h2 class="section-title">Services Built for <span class="gradient-text">Growth</span></h2>
+        <p class="section-desc">From menu websites to full-stack ordering apps — we cover every digital touchpoint for your business.</p>
+      </div>
+
+      <div class="services-grid">
+        <!-- Service Card 1 -->
+        <div class="service-card reveal-up" data-delay="0">
+          <div class="card-glow-effect"></div>
+          <div class="service-icon">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 7c0-1.1.9-2 2-2h14a2 2 0 012 2v10a2 2 0 01-2 2H5a2 2 0 01-2-2V7z"/><path d="M8 21h8"/><path d="M12 17v4"/><circle cx="12" cy="12" r="3"/></svg>
+          </div>
+          <h3 class="service-title">Restaurant Websites</h3>
+          <p class="service-desc">Beautiful, fast-loading sites with online menus, reservation forms, and mouth-watering photography layouts.</p>
+          <div class="service-tags">
+            <span class="stag">Menu Pages</span>
+            <span class="stag">Reservations</span>
+            <span class="stag">SEO</span>
+          </div>
+          <div class="card-link">Learn more <span>→</span></div>
+        </div>
+
+        <!-- Service Card 2 -->
+        <div class="service-card reveal-up" data-delay="100">
+          <div class="card-glow-effect glow-purple"></div>
+          <div class="service-icon icon-purple">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="5" y="2" width="14" height="20" rx="3"/><line x1="12" y1="18" x2="12" y2="18.01" stroke-width="2"/></svg>
+          </div>
+          <h3 class="service-title">Mobile Ordering Apps</h3>
+          <p class="service-desc">Native-feel PWAs and mobile apps for food ordering, loyalty programs, and push notification marketing.</p>
+          <div class="service-tags">
+            <span class="stag">PWA</span>
+            <span class="stag">Ordering</span>
+            <span class="stag">Loyalty</span>
+          </div>
+          <div class="card-link">Learn more <span>→</span></div>
+        </div>
+
+        <!-- Service Card 3 -->
+        <div class="service-card reveal-up" data-delay="200">
+          <div class="card-glow-effect glow-cyan"></div>
+          <div class="service-icon icon-cyan">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/><path d="M10 7v3h3"/></svg>
+          </div>
+          <h3 class="service-title">Local Business SEO</h3>
+          <p class="service-desc">Dominate Google Maps and local search results. We optimise your online presence to bring foot traffic.</p>
+          <div class="service-tags">
+            <span class="stag">Google Maps</span>
+            <span class="stag">Citations</span>
+            <span class="stag">Reviews</span>
+          </div>
+          <div class="card-link">Learn more <span>→</span></div>
+        </div>
+
+        <!-- Service Card 4 -->
+        <div class="service-card reveal-up" data-delay="0">
+          <div class="card-glow-effect glow-gold"></div>
+          <div class="service-icon icon-gold">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+          </div>
+          <h3 class="service-title">Brand Identity</h3>
+          <p class="service-desc">Logo design, brand guidelines, and visual systems that make your restaurant unforgettable online and offline.</p>
+          <div class="service-tags">
+            <span class="stag">Logo</span>
+            <span class="stag">Brand Kit</span>
+            <span class="stag">Menus</span>
+          </div>
+          <div class="card-link">Learn more <span>→</span></div>
+        </div>
+
+        <!-- Service Card 5 -->
+        <div class="service-card reveal-up" data-delay="100">
+          <div class="card-glow-effect"></div>
+          <div class="service-icon">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"/></svg>
+          </div>
+          <h3 class="service-title">E-Commerce & Delivery</h3>
+          <p class="service-desc">Zero-commission online stores. Sell directly to customers without paying Uber Eats or DoorDash margins.</p>
+          <div class="service-tags">
+            <span class="stag">Direct Orders</span>
+            <span class="stag">Payments</span>
+            <span class="stag">0% Commission</span>
+          </div>
+          <div class="card-link">Learn more <span>→</span></div>
+        </div>
+
+        <!-- Service Card 6 -->
+        <div class="service-card reveal-up" data-delay="200">
+          <div class="card-glow-effect glow-purple"></div>
+          <div class="service-icon icon-purple">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+          </div>
+          <h3 class="service-title">Speed & Performance</h3>
+          <p class="service-desc">Every site we build hits 95+ on PageSpeed. Faster sites convert more. We obsess over every millisecond.</p>
+          <div class="service-tags">
+            <span class="stag">Core Web Vitals</span>
+            <span class="stag">CDN</span>
+            <span class="stag">95+ Score</span>
+          </div>
+          <div class="card-link">Learn more <span>→</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════════
+       SECTION 3 — PORTFOLIO
+       Desktop: Grid with hover 3D transforms
+       Mobile: Vertical scroll cards
+  ══════════════════════════════════════════════════════════ -->
+  <section id="portfolio" class="section portfolio">
+    <div class="section-glow glow-cool" aria-hidden="true"></div>
+    <div class="container">
+      <div class="section-header reveal-up">
+        <span class="section-tag">Our Work</span>
+        <h2 class="section-title">Projects That <span class="gradient-text">Perform</span></h2>
+        <p class="section-desc">Each project is crafted with care, strategy and obsessive attention to detail.</p>
+      </div>
+
+      <!-- Filter tabs -->
+      <div class="portfolio-filters reveal-up">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="restaurant">Restaurants</button>
+        <button class="filter-btn" data-filter="cafe">Cafés</button>
+        <button class="filter-btn" data-filter="retail">Retail</button>
+      </div>
+
+      <!-- Portfolio Grid -->
+      <div class="portfolio-grid">
+        <div class="portfolio-card reveal-up" data-category="restaurant">
+          <div class="portfolio-thumb" style="--thumb-gradient: linear-gradient(135deg, #1A1020, #3D1A00)">
+            <div class="portfolio-mockup">
+              <div class="mockup-browser">
+                <div class="mockup-dots"><span></span><span></span><span></span></div>
+                <div class="mockup-body">
+                  <div class="mockup-hero" style="background: linear-gradient(135deg, #FF6B35, #FF3D00)"></div>
+                  <div class="mockup-lines"><div></div><div></div><div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="portfolio-info">
+            <span class="portfolio-cat">Restaurant</span>
+            <h3 class="portfolio-name">Ember & Oak Steakhouse</h3>
+            <p class="portfolio-desc">Full rebrand + ordering site. 3× more online reservations.</p>
+          </div>
+        </div>
+
+        <div class="portfolio-card reveal-up" data-category="cafe">
+          <div class="portfolio-thumb" style="--thumb-gradient: linear-gradient(135deg, #0A1A2A, #001A3D)">
+            <div class="portfolio-mockup">
+              <div class="mockup-browser">
+                <div class="mockup-dots"><span></span><span></span><span></span></div>
+                <div class="mockup-body">
+                  <div class="mockup-hero" style="background: linear-gradient(135deg, #00F5FF, #0066CC)"></div>
+                  <div class="mockup-lines"><div></div><div></div><div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="portfolio-info">
+            <span class="portfolio-cat">Café</span>
+            <h3 class="portfolio-name">Bloom Coffee Bar</h3>
+            <p class="portfolio-desc">Loyalty app + website. 2,000 members in 60 days.</p>
+          </div>
+        </div>
+
+        <div class="portfolio-card reveal-up" data-category="retail">
+          <div class="portfolio-thumb" style="--thumb-gradient: linear-gradient(135deg, #1A1A0A, #2A3D00)">
+            <div class="portfolio-mockup">
+              <div class="mockup-browser">
+                <div class="mockup-dots"><span></span><span></span><span></span></div>
+                <div class="mockup-body">
+                  <div class="mockup-hero" style="background: linear-gradient(135deg, #F7C948, #FF8C00)"></div>
+                  <div class="mockup-lines"><div></div><div></div><div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="portfolio-info">
+            <span class="portfolio-cat">Retail</span>
+            <h3 class="portfolio-name">Saffron Spice Market</h3>
+            <p class="portfolio-desc">E-commerce + local SEO. Page 1 Google in 90 days.</p>
+          </div>
+        </div>
+
+        <div class="portfolio-card reveal-up" data-category="restaurant">
+          <div class="portfolio-thumb" style="--thumb-gradient: linear-gradient(135deg, #1A0020, #2D0060)">
+            <div class="portfolio-mockup">
+              <div class="mockup-browser">
+                <div class="mockup-dots"><span></span><span></span><span></span></div>
+                <div class="mockup-body">
+                  <div class="mockup-hero" style="background: linear-gradient(135deg, #BF00FF, #6600CC)"></div>
+                  <div class="mockup-lines"><div></div><div></div><div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="portfolio-info">
+            <span class="portfolio-cat">Restaurant</span>
+            <h3 class="portfolio-name">Koji Ramen House</h3>
+            <p class="portfolio-desc">Custom ordering system. Eliminated 3rd-party fees entirely.</p>
+          </div>
+        </div>
+
+        <div class="portfolio-card reveal-up" data-category="cafe">
+          <div class="portfolio-thumb" style="--thumb-gradient: linear-gradient(135deg, #001A10, #003D1A)">
+            <div class="portfolio-mockup">
+              <div class="mockup-browser">
+                <div class="mockup-dots"><span></span><span></span><span></span></div>
+                <div class="mockup-body">
+                  <div class="mockup-hero" style="background: linear-gradient(135deg, #39FF14, #00CC44)"></div>
+                  <div class="mockup-lines"><div></div><div></div><div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="portfolio-info">
+            <span class="portfolio-cat">Café</span>
+            <h3 class="portfolio-name">The Green Press</h3>
+            <p class="portfolio-desc">Juice bar app + subscription service. 40% repeat orders.</p>
+          </div>
+        </div>
+
+        <div class="portfolio-card reveal-up" data-category="retail">
+          <div class="portfolio-thumb" style="--thumb-gradient: linear-gradient(135deg, #1A0A00, #3D1A00)">
+            <div class="portfolio-mockup">
+              <div class="mockup-browser">
+                <div class="mockup-dots"><span></span><span></span><span></span></div>
+                <div class="mockup-body">
+                  <div class="mockup-hero" style="background: linear-gradient(135deg, #FFB347, #FF6B35)"></div>
+                  <div class="mockup-lines"><div></div><div></div><div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="portfolio-info">
+            <span class="portfolio-cat">Retail</span>
+            <h3 class="portfolio-name">Casa Dulce Bakery</h3>
+            <p class="portfolio-desc">Online pre-orders + gift cards. Revenue up 65% in 6 months.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════════
+       SECTION 4 — ABOUT
+       Animated timeline + counter stats
+  ══════════════════════════════════════════════════════════ -->
+  <section id="about" class="section about">
+    <div class="section-glow glow-warm" aria-hidden="true"></div>
+    <div class="container">
+      <div class="about-grid">
+        <!-- Left: Visual -->
+        <div class="about-visual reveal-left">
+          <div class="about-visual-inner">
+            <canvas id="about-canvas" class="about-canvas" aria-hidden="true"></canvas>
+            
+            <!-- Floating stat badges -->
+            <div class="floating-badge badge-top-left">
+              <div class="badge-label">Client retention rate</div>
+              <div class="badge-value cyan">94%</div>
+            </div>
+            <div class="floating-badge badge-bottom-right">
+              <div class="badge-label">Avg. project time</div>
+              <div class="badge-value orange">14 Days</div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Right: Story -->
+        <div class="about-story reveal-right">
+          <span class="section-tag">Our Story</span>
+          <h2 class="section-title" style="text-align:left;margin-top:1rem">
+            We Started as <span class="gradient-text">Restaurant Owners</span> Too.
+          </h2>
+          <p class="about-text">We know the struggle. You're busy running a kitchen, managing staff, and trying to grow — and your website is an afterthought built on a free template that doesn't convert.</p>
+          <p class="about-text">Korexa was founded to change that. We build websites and apps that work as hard as you do — generating reservations, orders, and loyal customers on autopilot.</p>
+          
+          <!-- Timeline -->
+          <div class="timeline">
+            <div class="timeline-item reveal-up">
+              <div class="timeline-marker">
+                <div class="timeline-dot"></div>
+                <div class="timeline-line"></div>
+              </div>
+              <div class="timeline-content">
+                <h4 class="timeline-year">2019 — Founded</h4>
+                <p class="timeline-desc">Started helping local restaurants with basic web presence.</p>
+              </div>
+            </div>
+            <div class="timeline-item reveal-up">
+              <div class="timeline-marker">
+                <div class="timeline-dot"></div>
+                <div class="timeline-line"></div>
+              </div>
+              <div class="timeline-content">
+                <h4 class="timeline-year">2021 — App Development</h4>
+                <p class="timeline-desc">Expanded into mobile apps and zero-commission ordering platforms.</p>
+              </div>
+            </div>
+            <div class="timeline-item reveal-up">
+              <div class="timeline-marker">
+                <div class="timeline-dot"></div>
+              </div>
+              <div class="timeline-content">
+                <h4 class="timeline-year">2024 — 120+ Projects</h4>
+                <p class="timeline-desc">Now a full-service digital agency trusted by restaurants across 12 cities.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════════
+       SECTION 5 — TESTIMONIALS
+       Swipeable on mobile, auto-slide on desktop
+  ══════════════════════════════════════════════════════════ -->
+  <section id="testimonials" class="section testimonials">
+    <div class="container">
+      <div class="section-header reveal-up">
+        <span class="section-tag">Client Love</span>
+        <h2 class="section-title">Don't Take Our <span class="gradient-text">Word For It</span></h2>
+      </div>
+
+      <div class="testimonials-viewport" id="testimonials-viewport">
+        <div class="testimonials-track" id="testimonials-track">
+          <!-- Testimonial 1 -->
+          <div class="testimonial-card">
+            <div class="test-stars">★★★★★</div>
+            <p class="test-quote">"Our reservations went up 3× in the first month. The website is gorgeous and our customers love being able to book online. Worth every penny."</p>
+            <div class="test-author">
+              <div class="test-avatar" style="--avatar-grad: linear-gradient(135deg, #FF6B35, #FFB347)">MR</div>
+              <div class="test-info">
+                <div class="test-name">Marco Rossi</div>
+                <div class="test-role">Ember & Oak Steakhouse</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Testimonial 2 -->
+          <div class="testimonial-card">
+            <div class="test-stars">★★★★★</div>
+            <p class="test-quote">"They built our loyalty app in two weeks. We now have 2,000 members and our average customer visits 40% more often. Absolutely incredible team."</p>
+            <div class="test-author">
+              <div class="test-avatar" style="--avatar-grad: linear-gradient(135deg, #00F5FF, #0066CC)">SL</div>
+              <div class="test-info">
+                <div class="test-name">Sara Lee</div>
+                <div class="test-role">Bloom Coffee Bar</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Testimonial 3 -->
+          <div class="testimonial-card">
+            <div class="test-stars">★★★★★</div>
+            <p class="test-quote">"We were paying DoorDash 30% on every order. Korexa built us a direct ordering system that paid for itself in the first month. Game changer."</p>
+            <div class="test-author">
+              <div class="test-avatar" style="--avatar-grad: linear-gradient(135deg, #BF00FF, #6600CC)">KT</div>
+              <div class="test-info">
+                <div class="test-name">Kenji Tanaka</div>
+                <div class="test-role">Koji Ramen House</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Testimonial 4 -->
+          <div class="testimonial-card">
+            <div class="test-stars">★★★★★</div>
+            <p class="test-quote">"My bakery went from invisible online to ranking #1 on Google Maps in 90 days. I get 20+ pre-orders a day now through the website. Incredible ROI."</p>
+            <div class="test-author">
+              <div class="test-avatar" style="--avatar-grad: linear-gradient(135deg, #F7C948, #FF8C00)">AM</div>
+              <div class="test-info">
+                <div class="test-name">Amara Mensah</div>
+                <div class="test-role">Casa Dulce Bakery</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Testimonial 5 -->
+          <div class="testimonial-card">
+            <div class="test-stars">★★★★★</div>
+            <p class="test-quote">"The speed alone sold me. Our old site took 8 seconds to load. The new one loads in under 1 second. Conversions increased immediately."</p>
+            <div class="test-author">
+              <div class="test-avatar" style="--avatar-grad: linear-gradient(135deg, #39FF14, #00CC44)">JP</div>
+              <div class="test-info">
+                <div class="test-name">James Park</div>
+                <div class="test-role">The Green Press</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Slider dots -->
+      <div class="slider-dots" id="slider-dots"></div>
+      
+      <!-- Slider arrows (desktop) -->
+      <div class="slider-arrows">
+        <button class="slider-arrow arrow-prev" id="arrow-prev" aria-label="Previous testimonial">←</button>
+        <button class="slider-arrow arrow-next" id="arrow-next" aria-label="Next testimonial">→</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════════
+       SECTION 6 — PRICING
+       Mobile: Stacked readable cards
+       Desktop: 3-column with featured card
+  ══════════════════════════════════════════════════════════ -->
+  <section id="pricing" class="section pricing">
+    <div class="section-glow glow-cool" aria-hidden="true"></div>
+    <div class="container">
+      <div class="section-header reveal-up">
+        <span class="section-tag">Transparent Pricing</span>
+        <h2 class="section-title">Simple Plans, <span class="gradient-text">Big Results</span></h2>
+        <p class="section-desc">No hidden fees. Cancel anytime. 30-day money-back guarantee.</p>
+      </div>
+
+      <div class="pricing-grid">
+        <!-- Starter -->
+        <div class="pricing-card reveal-up">
+          <div class="price-plan">Starter</div>
+          <div class="price-amount">$799</div>
+          <div class="price-period">one-time</div>
+          <ul class="price-features">
+            <li class="feature-yes"><span class="feat-icon">✓</span> 5-page professional website</li>
+            <li class="feature-yes"><span class="feat-icon">✓</span> Mobile responsive design</li>
+            <li class="feature-yes"><span class="feat-icon">✓</span> Basic SEO setup</li>
+            <li class="feature-yes"><span class="feat-icon">✓</span> Contact form</li>
+            <li class="feature-yes"><span class="feat-icon">✓</span> Google Maps integration</li>
+            <li class="feature-no"><span class="feat-icon">✗</span> Online ordering</li>
+            <li class="feature-no"><span class="feat-icon">✗</span> Loyalty program</li>
+          </ul>
+          <a href="#contact" class="btn-outline price-cta">Get Started</a>
+        </div>
+
+        <!-- Growth (featured) -->
+        <div class="pricing-card pricing-featured reveal-up">
+          <div class="pricing-ribbon">Most Popular</div>
+          <div class="price-plan featured-plan">Growth</div>
+          <div class="price-amount">$1,999</div>
+          <div class="price-period">one-time</div>
+          <ul class="price-features">
+            <li class="feature-yes"><span class="feat-icon">✓</span> 10-page premium website</li>
+            <li class="feature-yes"><span class="feat-icon">✓</span> SEO + Google Maps optimization</li>
+            <li class="feature-yes"><span class="feat-icon">✓</span> Online ordering system</li>
+            <li class="feature-yes"><span class="feat-icon">✓</span> Custom brand identity</li>
+            <li class="feature-yes"><span class="feat-icon">✓</span> Reservation system</li>
+            <li class="feature-yes"><span class="feat-icon">✓</span> Analytics dashboard</li>
+            <li class="feature-no"><span class="feat-icon">✗</span> Mobile app</li>
+          </ul>
+          <a href="#contact" class="btn-primary price-cta">Get Started</a>
+        </div>
+
+        <!-- Pro -->
+        <div class="pricing-card reveal-up">
+          <div class="price-plan">Pro</div>
+          <div class="price-amount">$4,499</div>
+          <div class="price-period">one-time</div>
+          <ul class="price-features">
+            <li class="feature-yes"><span class="feat-icon">✓</span> Everything in Growth</li>
+            <li class="feature-yes"><span class="feat-icon">✓</span> Custom mobile app (PWA)</li>
+            <li class="feature-yes"><span class="feat-icon">✓</span> Loyalty & rewards program</li>
+            <li class="feature-yes"><span class="feat-icon">✓</span> Push notifications</li>
+            <li class="feature-yes"><span class="feat-icon">✓</span> Multi-location support</li>
+            <li class="feature-yes"><span class="feat-icon">✓</span> Priority support 24/7</li>
+            <li class="feature-yes"><span class="feat-icon">✓</span> 1 year free maintenance</li>
+          </ul>
+          <a href="#contact" class="btn-outline price-cta">Get Started</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════════
+       SECTION 7 — CONTACT
+       Mobile-friendly form with large inputs
+  ══════════════════════════════════════════════════════════ -->
+  <section id="contact" class="section contact">
+    <div class="section-glow glow-warm" aria-hidden="true"></div>
+    <div class="container container-narrow">
+      <div class="section-header reveal-up">
+        <span class="section-tag">Get In Touch</span>
+        <h2 class="section-title">Ready to <span class="gradient-text">Grow Online?</span></h2>
+        <p class="section-desc">Tell us about your business. Free strategy call — no commitment.</p>
+      </div>
+
+      <form id="contact-form" class="contact-form glass-card reveal-up" novalidate>
+        <div class="form-group">
+          <input type="text" id="inp-name" name="name" class="form-input" placeholder=" " required autocomplete="name" />
+          <label for="inp-name" class="form-label">Your Name</label>
+        </div>
+        <div class="form-group">
+          <input type="email" id="inp-email" name="email" class="form-input" placeholder=" " required autocomplete="email" />
+          <label for="inp-email" class="form-label">Email Address</label>
+        </div>
+        <div class="form-group">
+          <input type="text" id="inp-business" name="business" class="form-input" placeholder=" " autocomplete="organization" />
+          <label for="inp-business" class="form-label">Business Name</label>
+        </div>
+        <div class="form-group">
+          <select id="inp-service" name="service" class="form-input form-select" required>
+            <option value="" disabled selected>Select a Service</option>
+            <option>Restaurant Website</option>
+            <option>Mobile Ordering App</option>
+            <option>Local SEO</option>
+            <option>Brand Identity</option>
+            <option>Full Growth Package</option>
+          </select>
+          <label for="inp-service" class="form-label form-label-active">Service Needed</label>
+        </div>
+        <div class="form-group">
+          <textarea id="inp-message" name="message" class="form-input form-textarea" placeholder=" " rows="4" required></textarea>
+          <label for="inp-message" class="form-label">Tell us about your project</label>
+        </div>
+        <button type="submit" id="form-submit" class="btn-primary form-submit">
+          <span>Send Message</span>
+          <span class="btn-arrow">→</span>
+        </button>
+        <div id="form-success" class="form-success">
+          <span class="success-icon">✓</span> Message sent! We'll be in touch within 24 hours.
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="#" class="nav-logo footer-logo">
+            <span class="logo-k">K</span><span class="logo-text">orexa</span>
+          </a>
+          <p class="footer-desc">Premium websites and apps for restaurants and local businesses. We turn your digital presence into your #1 sales channel.</p>
+          <div class="footer-socials">
+            <a href="#" class="social-btn" aria-label="Instagram">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/></svg>
+            </a>
+            <a href="#" class="social-btn" aria-label="LinkedIn">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-4 0v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+            </a>
+            <a href="#" class="social-btn" aria-label="Twitter / X">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4l11.733 16h4.267l-11.733 -16z"/><path d="M4 20l6.768-6.768m2.46-2.46l6.772-6.772"/></svg>
+            </a>
+          </div>
+        </div>
+        <div class="footer-links-group">
+          <h4 class="footer-heading">Services</h4>
+          <ul class="footer-links">
+            <li><a href="#services">Restaurant Websites</a></li>
+            <li><a href="#services">Mobile Apps</a></li>
+            <li><a href="#services">Local SEO</a></li>
+            <li><a href="#services">Brand Identity</a></li>
+          </ul>
+        </div>
+        <div class="footer-links-group">
+          <h4 class="footer-heading">Company</h4>
+          <ul class="footer-links">
+            <li><a href="#about">About Us</a></li>
+            <li><a href="#portfolio">Portfolio</a></li>
+            <li><a href="#pricing">Pricing</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2025 Korexa. All rights reserved.</p>
+        <p>Made with ❤️ for restaurant owners everywhere.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="main.js"></script>
+</body>
+</html>
