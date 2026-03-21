@@ -1635,8 +1635,14 @@ body.loader-active {
 
 /* Visual error state for form validation */
 .form-input.error {
-  border-color: rgba(255, 61, 0, 0.5) !important;
-  background: rgba(255, 61, 0, 0.04) !important;
+  border-color: rgba(255, 61, 0, 0.4);
+  background: rgba(255, 61, 0, 0.03);
+}
+
+.form-input.error:focus {
+  border-color: rgba(255, 61, 0, 0.7);
+  background: rgba(255, 61, 0, 0.05);
+  box-shadow: 0 0 0 3px rgba(255, 61, 0, 0.15);
 }
 
 /* Screen reader only helper */

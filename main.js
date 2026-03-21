@@ -28,7 +28,17 @@ window.addEventListener('load', () => {
   const progressContainer = document.getElementById('pubg-progress-container');
   const messageEl = document.getElementById('pubg-message');
   
+  const siteContent = document.getElementById('site-content');
+  if (siteContent) {
+    siteContent.setAttribute('aria-hidden', 'true');
+    siteContent.setAttribute('inert', '');
+  }
+
   if (loader && percentEl && progressBar && messageEl) {
+    // Bring focus into the loader for keyboard accessibility
+    loader.setAttribute('tabindex', '-1');
+    loader.focus();
+
     const messages = [
       "Initializing system...",
       "Loading assets...",
@@ -86,13 +96,21 @@ window.addEventListener('load', () => {
         setTimeout(() => {
           loader.classList.add('loaded');
           
-          // Announce to screen readers
+          // Announce to screen readers and reveal site
           const loaderStatus = document.getElementById('loader-status');
           if (loaderStatus) loaderStatus.textContent = 'Page loaded successfully.';
+          
+          if (siteContent) {
+             siteContent.removeAttribute('aria-hidden');
+             siteContent.removeAttribute('inert');
+          }
 
           // Unlock body scroll after transition completes (~900ms)
           setTimeout(() => {
             document.body.classList.remove('loader-active');
+            
+            // Return focus to top level
+            if (siteContent) siteContent.focus(); 
 
             // Trigger hero entrance animations
             if (typeof triggerHeroEntrance === 'function') {
@@ -787,10 +805,11 @@ if (contactForm) {
     let isValid = true;
     [nameInp, emailInp, msgInp, serviceInp].forEach(el => {
       if (!el) return;
+      const val = el.value.trim();
       if (el.tagName === 'SELECT') {
         if (!el.value) { isValid = false; el.classList.add('error'); }
         else { el.classList.remove('error'); }
-      } else if (!el.value || (el.type === 'email' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(el.value))) {
+      } else if (!val || (el.type === 'email' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val))) {
         isValid = false;
         el.classList.add('error');
       } else {

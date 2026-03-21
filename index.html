@@ -67,7 +67,9 @@
   </div>
 
   <!-- ========== NAVIGATION ========== -->
-  <nav id="navbar" class="navbar" role="navigation" aria-label="Main navigation">
+  <!-- ========== MAIN CONTENT (Wrapped for focus trapping during load) ========== -->
+  <div id="site-content" aria-hidden="true" tabindex="-1">
+    <nav id="navbar" class="navbar" role="navigation" aria-label="Main navigation">
     <a href="#" class="nav-logo" aria-label="Korexa Home">
       <span class="logo-k">K</span><span class="logo-text">orexa</span>
     </a>
@@ -716,6 +718,7 @@
       </div>
     </div>
   </footer>
+  </div>
 
   <script src="main.js"></script>
 </body>
