@@ -787,10 +787,11 @@ if (contactForm) {
     let isValid = true;
     [nameInp, emailInp, msgInp, serviceInp].forEach(el => {
       if (!el) return;
+      const value = (el.value || '').trim();
       if (el.tagName === 'SELECT') {
-        if (!el.value) { isValid = false; el.classList.add('error'); }
+        if (!value) { isValid = false; el.classList.add('error'); }
         else { el.classList.remove('error'); }
-      } else if (!el.value || (el.type === 'email' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(el.value))) {
+      } else if (!value || (el.type === 'email' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value))) {
         isValid = false;
         el.classList.add('error');
       } else {
