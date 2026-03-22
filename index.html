@@ -2,13 +2,12 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Korexa — Premium Websites & Apps for Restaurants & Local Businesses</title>
   <meta name="description" content="Korexa crafts award-winning websites and apps for restaurants and local businesses. Elevate your brand with a stunning digital presence that converts." />
   <meta property="og:title" content="Korexa — Premium Digital Agency" />
   <meta property="og:description" content="Award-winning websites & apps for restaurants and local businesses." />
   <meta property="og:type" content="website" />
-  <meta name="theme-color" content="#080811" />
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -67,7 +66,9 @@
   </div>
 
   <!-- ========== NAVIGATION ========== -->
-  <nav id="navbar" class="navbar" role="navigation" aria-label="Main navigation">
+  <!-- ========== MAIN CONTENT (Wrapped for focus trapping during load) ========== -->
+  <div id="site-content" aria-hidden="true" tabindex="-1">
+    <nav id="navbar" class="navbar" role="navigation" aria-label="Main navigation">
     <a href="#" class="nav-logo" aria-label="Korexa Home">
       <span class="logo-k">K</span><span class="logo-text">orexa</span>
     </a>
@@ -414,7 +415,7 @@
         <!-- Right: Story -->
         <div class="about-story reveal-right">
           <span class="section-tag">Our Story</span>
-          <h2 class="section-title" style="text-align:left;margin-top:1rem">
+          <h2 class="section-title about-section-title">
             We Started as <span class="gradient-text">Restaurant Owners</span> Too.
           </h2>
           <p class="about-text">We know the struggle. You're busy running a kitchen, managing staff, and trying to grow — and your website is an afterthought built on a free template that doesn't convert.</p>
@@ -475,7 +476,7 @@
             <div class="test-stars">★★★★★</div>
             <p class="test-quote">"Our reservations went up 3× in the first month. The website is gorgeous and our customers love being able to book online. Worth every penny."</p>
             <div class="test-author">
-              <div class="test-avatar" style="--avatar-grad: linear-gradient(135deg, #FF6B35, #FFB347)">MR</div>
+              <div class="test-avatar avatar-grad-1">MR</div>
               <div class="test-info">
                 <div class="test-name">Marco Rossi</div>
                 <div class="test-role">Ember & Oak Steakhouse</div>
@@ -488,7 +489,7 @@
             <div class="test-stars">★★★★★</div>
             <p class="test-quote">"They built our loyalty app in two weeks. We now have 2,000 members and our average customer visits 40% more often. Absolutely incredible team."</p>
             <div class="test-author">
-              <div class="test-avatar" style="--avatar-grad: linear-gradient(135deg, #00F5FF, #0066CC)">SL</div>
+              <div class="test-avatar avatar-grad-2">SL</div>
               <div class="test-info">
                 <div class="test-name">Sara Lee</div>
                 <div class="test-role">Bloom Coffee Bar</div>
@@ -501,7 +502,7 @@
             <div class="test-stars">★★★★★</div>
             <p class="test-quote">"We were paying DoorDash 30% on every order. Korexa built us a direct ordering system that paid for itself in the first month. Game changer."</p>
             <div class="test-author">
-              <div class="test-avatar" style="--avatar-grad: linear-gradient(135deg, #BF00FF, #6600CC)">KT</div>
+              <div class="test-avatar avatar-grad-3">KT</div>
               <div class="test-info">
                 <div class="test-name">Kenji Tanaka</div>
                 <div class="test-role">Koji Ramen House</div>
@@ -514,7 +515,7 @@
             <div class="test-stars">★★★★★</div>
             <p class="test-quote">"My bakery went from invisible online to ranking #1 on Google Maps in 90 days. I get 20+ pre-orders a day now through the website. Incredible ROI."</p>
             <div class="test-author">
-              <div class="test-avatar" style="--avatar-grad: linear-gradient(135deg, #F7C948, #FF8C00)">AM</div>
+              <div class="test-avatar avatar-grad-4">AM</div>
               <div class="test-info">
                 <div class="test-name">Amara Mensah</div>
                 <div class="test-role">Casa Dulce Bakery</div>
@@ -527,7 +528,7 @@
             <div class="test-stars">★★★★★</div>
             <p class="test-quote">"The speed alone sold me. Our old site took 8 seconds to load. The new one loads in under 1 second. Conversions increased immediately."</p>
             <div class="test-author">
-              <div class="test-avatar" style="--avatar-grad: linear-gradient(135deg, #39FF14, #00CC44)">JP</div>
+              <div class="test-avatar avatar-grad-5">JP</div>
               <div class="test-info">
                 <div class="test-name">James Park</div>
                 <div class="test-role">The Green Press</div>
@@ -566,7 +567,7 @@
         <!-- Starter -->
         <div class="pricing-card reveal-up">
           <div class="price-plan">Starter</div>
-          <div class="price-amount">$799</div>
+          <div class="price-amount">₹1,500</div>
           <div class="price-period">one-time</div>
           <ul class="price-features">
             <li class="feature-yes"><span class="feat-icon">✓</span> 5-page professional website</li>
@@ -584,7 +585,7 @@
         <div class="pricing-card pricing-featured reveal-up">
           <div class="pricing-ribbon">Most Popular</div>
           <div class="price-plan featured-plan">Growth</div>
-          <div class="price-amount">$1,999</div>
+          <div class="price-amount">₹3,000</div>
           <div class="price-period">one-time</div>
           <ul class="price-features">
             <li class="feature-yes"><span class="feat-icon">✓</span> 10-page premium website</li>
@@ -601,7 +602,7 @@
         <!-- Pro -->
         <div class="pricing-card reveal-up">
           <div class="price-plan">Pro</div>
-          <div class="price-amount">$4,499</div>
+          <div class="price-amount">₹4,500</div>
           <div class="price-period">one-time</div>
           <ul class="price-features">
             <li class="feature-yes"><span class="feat-icon">✓</span> Everything in Growth</li>
@@ -716,6 +717,7 @@
       </div>
     </div>
   </footer>
+  </div>
 
   <script src="main.js"></script>
 </body>

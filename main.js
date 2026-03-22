@@ -27,8 +27,18 @@ window.addEventListener('load', () => {
   const progressBar = document.getElementById('pubg-progress-bar');
   const progressContainer = document.getElementById('pubg-progress-container');
   const messageEl = document.getElementById('pubg-message');
-  
+
+  const siteContent = document.getElementById('site-content');
+  if (siteContent) {
+    siteContent.setAttribute('aria-hidden', 'true');
+    siteContent.setAttribute('inert', '');
+  }
+
   if (loader && percentEl && progressBar && messageEl) {
+    // Bring focus into the loader for keyboard accessibility
+    loader.setAttribute('tabindex', '-1');
+    loader.focus();
+
     const messages = [
       "Initializing system...",
       "Loading assets...",
@@ -37,27 +47,27 @@ window.addEventListener('load', () => {
       "Building visuals...",
       "Almost ready..."
     ];
-    
+
     let currentPercent = 0;
     let lastDisplayedPercent = -1;
-    
+
     // Smooth easing for cinematic feel
     function easeOutExpo(x) {
       return x === 1 ? 1 : 1 - Math.pow(2, -10 * x);
     }
-    
+
     const startTime = performance.now();
     const minDuration = 2400; // Minimum loading time for premium feel
-    
+
     function updateLoader(currentTime) {
       const elapsed = currentTime - startTime;
       const progress = Math.min(elapsed / minDuration, 1);
-      
+
       // EaseOutExpo: fast start, smooth finish
       const easedProgress = easeOutExpo(progress);
-      
+
       currentPercent = Math.min(Math.floor(easedProgress * 100), 100);
-      
+
       // Only update DOM if percentage changed (performance optimization)
       if (currentPercent !== lastDisplayedPercent) {
         percentEl.textContent = currentPercent;
@@ -67,32 +77,40 @@ window.addEventListener('load', () => {
           progressContainer.setAttribute('aria-valuenow', currentPercent);
         }
       }
-      
+
       // Update progress bar
       progressBar.style.width = currentPercent + '%';
-      
+
       // Sync message with progress phase
-      if (currentPercent < 20)      messageEl.textContent = messages[0];
+      if (currentPercent < 20) messageEl.textContent = messages[0];
       else if (currentPercent < 38) messageEl.textContent = messages[1];
       else if (currentPercent < 55) messageEl.textContent = messages[2];
       else if (currentPercent < 72) messageEl.textContent = messages[3];
       else if (currentPercent < 90) messageEl.textContent = messages[4];
-      else                          messageEl.textContent = messages[5];
-      
+      else messageEl.textContent = messages[5];
+
       if (progress < 1) {
         requestAnimationFrame(updateLoader);
       } else {
         // Hold at 100% for a dramatic pause, then cinematic fade-out
         setTimeout(() => {
           loader.classList.add('loaded');
-          
-          // Announce to screen readers
+
+          // Announce to screen readers and reveal site
           const loaderStatus = document.getElementById('loader-status');
           if (loaderStatus) loaderStatus.textContent = 'Page loaded successfully.';
+
+          if (siteContent) {
+            siteContent.removeAttribute('aria-hidden');
+            siteContent.removeAttribute('inert');
+          }
 
           // Unlock body scroll after transition completes (~900ms)
           setTimeout(() => {
             document.body.classList.remove('loader-active');
+
+            // Return focus to top level
+            if (siteContent) siteContent.focus();
 
             // Trigger hero entrance animations
             if (typeof triggerHeroEntrance === 'function') {
@@ -102,7 +120,7 @@ window.addEventListener('load', () => {
         }, 400); // Cinematic pause at 100% before exit
       }
     }
-    
+
     requestAnimationFrame(updateLoader);
 
   } else if (loader) {
@@ -787,11 +805,10 @@ if (contactForm) {
     let isValid = true;
     [nameInp, emailInp, msgInp, serviceInp].forEach(el => {
       if (!el) return;
-      const value = (el.value || '').trim();
       if (el.tagName === 'SELECT') {
         if (!value) { isValid = false; el.classList.add('error'); }
         else { el.classList.remove('error'); }
-      } else if (!value || (el.type === 'email' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value))) {
+      } else if (!el.value || (el.type === 'email' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(el.value))) {
         isValid = false;
         el.classList.add('error');
       } else {
