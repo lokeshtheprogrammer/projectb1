@@ -16,9 +16,6 @@
 
   <!-- Stylesheets -->
   <link rel="stylesheet" href="style.css" />
-
-  <!-- Three.js (lightweight, loaded async) -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js" defer></script>
 </head>
 <body>
 
@@ -134,8 +131,15 @@
       </div>
       
       <h1 class="hero-title" id="hero-title">
-        Your Restaurant Deserves<br/>
-        <span class="gradient-text">a Website That Sells.</span>
+        <span class="hero-title-line">Your Restaurant Deserves</span>
+        <span class="hero-title-line hero-title-line-typing">
+          <span
+            class="gradient-text hero-typing-text"
+            id="hero-typing-text"
+            data-phrases="a Website That Sells.|More Direct Orders.|a Brand Guests Remember.|a Digital Presence That Converts."
+          >a Website That Sells.</span>
+          <span class="hero-typing-caret" id="hero-typing-caret" aria-hidden="true"></span>
+        </span>
       </h1>
       
       <p class="hero-sub" id="hero-sub">
@@ -175,7 +179,7 @@
 
     <!-- Scroll indicator -->
     <div class="scroll-indicator" aria-hidden="true">
-      <span class="scroll-text">Scroll</span>
+     
       <div class="scroll-line"></div>
     </div>
   </section>
@@ -719,6 +723,6 @@
   </footer>
   </div>
 
-  <script src="main.js"></script>
+  <script type="module" src="main.js?v=5"></script>
 </body>
 </html>
